@@ -8,9 +8,12 @@ import {
 import { Plus, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export function ProductLayout() {
   const navigate = useNavigate()
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   function handleCreate() {
     navigate('/products/new')
@@ -23,7 +26,11 @@ export function ProductLayout() {
       <div className="flex flex-col py-4 gap-4">
         <div className="flex flex-row justify-end gap-4 my-4">
           <InputGroup className="max-w-96">
-            <InputGroupInput placeholder="Search..." />
+            <InputGroupInput
+              placeholder="Procurar..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <InputGroupAddon>
               <Search />
             </InputGroupAddon>
@@ -35,7 +42,7 @@ export function ProductLayout() {
         </div>
 
         <div>
-          <ProductDataTable />
+          <ProductDataTable searchTerm={searchTerm} />
           <Outlet />
         </div>
       </div>

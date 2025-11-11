@@ -2,7 +2,10 @@ import { DataTable } from '@/components/ui/data-table'
 import { brandColumns } from './brand-columns'
 import { useBrands } from '../../hooks/use-brand'
 
-export function BrandDataTable() {
+type BrandDataTableProps = {
+  searchTerm?: string
+}
+export function BrandDataTable({ searchTerm }: BrandDataTableProps) {
   const { data: brands, isLoading } = useBrands()
 
   return (
@@ -12,7 +15,9 @@ export function BrandDataTable() {
       ) : (
         <DataTable
           columns={brandColumns}
-          data={brands!}
+          data={brands!.filter((p) =>
+            p.name.toLowerCase().includes(searchTerm?.toLowerCase() ?? ''),
+          )}
         />
       )}
     </div>

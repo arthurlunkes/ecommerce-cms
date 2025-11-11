@@ -32,8 +32,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { useCategories } from '@/cases/categories/hooks/use-category'
 import { useBrands } from '@/cases/brands/hooks/use-brand'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { TabsContent } from '@radix-ui/react-tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 const formSchema = z.object({
   name: z
