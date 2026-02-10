@@ -6,16 +6,6 @@ import { FormattedNumber, IntlProvider } from 'react-intl'
 
 export const productColumns: ColumnDef<ProductDTO>[] = [
   {
-    accessorKey: 'id',
-    header: 'Id',
-    cell: ({ row }) => {
-      const product = row.original
-      return (
-        <p className={!product.active ? 'text-gray-300' : ''}>{product.id}</p>
-      )
-    },
-  },
-  {
     accessorKey: 'name',
     header: 'Nome',
     cell: ({ row }) => {

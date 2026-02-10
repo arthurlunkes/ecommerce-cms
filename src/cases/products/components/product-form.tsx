@@ -179,14 +179,16 @@ export function ProductForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {categories.map((category) => (
-                          <SelectItem
-                            key={category.id}
-                            value={category.id || ''}
-                          >
-                            {category.name}
-                          </SelectItem>
-                        ))}
+                        {categories
+                          .filter((c) => !!c.id)
+                          .map((category) => (
+                            <SelectItem
+                              key={category.id}
+                              value={category.id!}
+                            >
+                              {category.name}
+                            </SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -209,14 +211,16 @@ export function ProductForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {brands.map((brand) => (
-                          <SelectItem
-                            key={brand.id}
-                            value={brand.id || ''}
-                          >
-                            {brand.name}
-                          </SelectItem>
-                        ))}
+                        {brands
+                          .filter((b) => !!b.id)
+                          .map((brand) => (
+                            <SelectItem
+                              key={brand.id}
+                              value={brand.id!}
+                            >
+                              {brand.name}
+                            </SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

@@ -7,6 +7,7 @@ type ProductDataTableProps = {
 }
 export function ProductDataTable({ searchTerm }: ProductDataTableProps) {
   const { data: products, isLoading } = useProducts()
+  const rows = Array.isArray(products) ? products : []
 
   return (
     <div>
@@ -15,8 +16,10 @@ export function ProductDataTable({ searchTerm }: ProductDataTableProps) {
       ) : (
         <DataTable
           columns={productColumns}
-          data={products!.filter((p) =>
-            p.name.toLowerCase().includes(searchTerm?.toLowerCase() ?? ''),
+          data={rows.filter((p) =>
+            (p.name || '')
+              .toLowerCase()
+              .includes(searchTerm?.toLowerCase() ?? ''),
           )}
         />
       )}

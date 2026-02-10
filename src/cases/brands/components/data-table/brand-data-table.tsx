@@ -7,6 +7,7 @@ type BrandDataTableProps = {
 }
 export function BrandDataTable({ searchTerm }: BrandDataTableProps) {
   const { data: brands, isLoading } = useBrands()
+  const rows = Array.isArray(brands) ? brands : []
 
   return (
     <div>
@@ -15,8 +16,10 @@ export function BrandDataTable({ searchTerm }: BrandDataTableProps) {
       ) : (
         <DataTable
           columns={brandColumns}
-          data={brands!.filter((p) =>
-            p.name.toLowerCase().includes(searchTerm?.toLowerCase() ?? ''),
+          data={rows.filter((p) =>
+            (p.name || '')
+              .toLowerCase()
+              .includes(searchTerm?.toLowerCase() ?? ''),
           )}
         />
       )}

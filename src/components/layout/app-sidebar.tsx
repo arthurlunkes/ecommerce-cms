@@ -12,12 +12,21 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
+  SidebarFooter,
 } from '@/components/ui/sidebar'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, LogOut, User, BarChart3 } from 'lucide-react'
+import { useAuthStore } from '../../cases/auth/useAuthStore'
+import { Button } from '../ui/button'
 
 // This is sample data.
 const data = {
   navMain: [
+    {
+      title: 'Relatórios',
+      url: '/reports',
+      icon: BarChart3,
+      items: [],
+    },
     {
       title: 'Cadastros',
       url: '#',
@@ -54,6 +63,8 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user, logout } = useAuthStore()
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -95,6 +106,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     href={item.url}
                     className="font-medium"
                   >
+                    {item.url !== '#' && item.icon && (
+                      <>
+                        {item.icon === BarChart3 && (
+                          <BarChart3
+                            className="mr-2"
+                            size={18}
+                          />
+                        )}
+                      </>
+                    )}
                     {item.title}
                   </a>
                 </SidebarMenuButton>
@@ -114,6 +135,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <div className="p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+              <User size={16} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                {user?.username || 'Usuário'}
+              </p>
+              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={logout}
+          >
+            <LogOut
+              className="mr-2"
+              size={16}
+            />
+            Sair
+          </Button>
+        </div>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

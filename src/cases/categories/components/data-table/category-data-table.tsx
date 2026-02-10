@@ -7,6 +7,7 @@ type CategoryDataTableProps = {
 }
 export function CategoryDataTable({ searchTerm }: CategoryDataTableProps) {
   const { data: categories, isLoading } = useCategories()
+  const rows = Array.isArray(categories) ? categories : []
 
   return (
     <div>
@@ -15,8 +16,10 @@ export function CategoryDataTable({ searchTerm }: CategoryDataTableProps) {
       ) : (
         <DataTable
           columns={categoryColumns}
-          data={categories!.filter((p) =>
-            p.name.toLowerCase().includes(searchTerm?.toLowerCase() ?? ''),
+          data={rows.filter((p) =>
+            (p.name || '')
+              .toLowerCase()
+              .includes(searchTerm?.toLowerCase() ?? ''),
           )}
         />
       )}

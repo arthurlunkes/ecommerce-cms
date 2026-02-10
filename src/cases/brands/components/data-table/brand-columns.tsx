@@ -4,10 +4,6 @@ import { DataTableAction } from '@/components/layout/data-table-actions'
 
 export const brandColumns: ColumnDef<BrandDTO>[] = [
   {
-    accessorKey: 'id',
-    header: 'Id',
-  },
-  {
     accessorKey: 'name',
     header: 'Nome da Marca',
   },

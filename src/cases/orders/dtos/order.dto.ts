@@ -9,7 +9,8 @@ export interface OrderItemDTO {
 }
 export interface OrderDTO {
   id?: string
-  custumer: CustomerDTO
+  customer: CustomerDTO | string | null
+  shipping: number
   status: string
   total: number
   items: OrderItemDTO[]
